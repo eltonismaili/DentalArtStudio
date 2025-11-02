@@ -1,0 +1,284 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+:root {
+  --primary-color: #1e3a8a;
+  --secondary-color: #3b82f6;
+  --light-blue: #60a5fa;
+  --accent-color: #14b8a6;
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+  --muted-color: #64748b;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1),0 10px 10px -5px rgba(0,0,0,0.04);
+  --shadow-xl: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+.btn-custom-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.btn-custom-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+  opacity: 0.95;
+}
+
+.btn-custom-outline {
+  background: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 12px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.btn-custom-outline:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.custom-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.custom-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+
+@keyframes fadeInUp {
+  from {opacity:0; transform:translateY(30px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+@keyframes slideDown {
+  from {opacity:0; transform:translateY(-20px);}
+  to {opacity:1; transform:translateY(0);}
+}
+
+@keyframes scaleIn {
+  from {opacity:0; transform:scale(0.8);}
+  to {opacity:1; transform:scale(1);}
+}
+
+@keyframes pulse {
+  0%,100% {opacity:1;}
+  50% {opacity:0.5;}
+}
+
+.delay-100 {animation-delay:0.1s;}
+.delay-200 {animation-delay:0.2s;}
+.delay-300 {animation-delay:0.3s;}
+.delay-400 {animation-delay:0.4s;}
+.delay-500 {animation-delay:0.5s;}
+
+.text-muted-custom {color:var(--muted-color);}
+.bg-muted-custom {background-color:#f1f5f9;}
+
+.icon-container {
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform 0.3s ease;
+}
+
+.icon-container:hover {transform:scale(1.1);}
+
+.before-after-container {
+  position:relative;
+  width:100%;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  border-radius:16px;
+  box-shadow:var(--shadow-xl);
+  cursor:ew-resize;
+  user-select:none;
+}
+
+.before-after-image {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  pointer-events:none;
+}
+
+.slider-handle {
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:4px;
+  background:white;
+  cursor:ew-resize;
+  z-index:10;
+}
+
+.slider-button {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:48px;
+  height:48px;
+  background:white;
+  border-radius:50%;
+  box-shadow:var(--shadow-xl);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:ew-resize;
+}
+
+.badge-custom {
+  position:absolute;
+  padding:8px 16px;
+  border-radius:50px;
+  font-weight:600;
+  box-shadow:var(--shadow-lg);
+  z-index:5;
+}
+
+@media (max-width:768px) {
+  h1 {font-size:2.5rem !important;}
+  h2 {font-size:2rem !important;}
+  h3 {font-size:1.5rem !important;}
+}
+.contact-card {
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.icon-container {
+  transition: all 0.3s;
+}
+
+.contact-card:hover .icon-container {
+  transform: scale(1.1);
+}
+.led-text {
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  color: #a9d4e0;
+  text-shadow:
+          0 0 5px #a9d4e0,
+          0 0 10px #a9d4e0,
+          0 0 20px #a9d4e0,
+          0 0 40px #a9d4e0,
+          0 0 80px #a9d4e0;
+  animation: led-shine 2s infinite alternate;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+@keyframes led-shine {
+  0% {
+    text-shadow:
+            0 0 2px #a9d4e0,
+            0 0 5px #a9d4e0,
+            0 0 10px #a9d4e0,
+            0 0 20px #a9d4e0,
+            0 0 40px #a9d4e0;
+    color: white;
+  }
+  50% {
+    text-shadow:
+            0 0 5px #a9d4e0,
+            0 0 10px #a9d4e0,
+            0 0 20px #a9d4e0,
+            0 0 40px #a9d4e0,
+            0 0 80px #a9d4e0;
+    color: white;
+  }
+  100% {
+    text-shadow:
+            0 0 2px #a9d4e0,
+            0 0 5px #a9d4e0,
+            0 0 10px #a9d4e0,
+            0 0 20px #a9d4e0,
+            0 0 40px #a9d4e0;
+    color: white;
+  }
+}
+
+html {scroll-behavior:smooth;}
+
+::-webkit-scrollbar {width:10px;}
+::-webkit-scrollbar-track {background:var(--background-color);}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius:5px;
+}
+::-webkit-scrollbar-thumb:hover {background: var(--secondary-color);}
