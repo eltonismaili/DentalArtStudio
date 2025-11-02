@@ -1,0 +1,4 @@
+package com.clinic.dentalclinicbackend.service;
+
+public class EmailService {
+}
