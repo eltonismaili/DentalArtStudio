@@ -45,8 +45,8 @@ export default function Footer() {
                         <div className="d-flex gap-3 mt-3 justify-content-center justify-content-md-start">
                             {[
                                 { icon: <Instagram size={22} />, link: "https://www.instagram.com/dentalartstudio.ks/" },
-                                { icon: <Mail size={22} />, link: "mailto:dentalartstudio@gmail.com" },
-                                { icon: <Phone size={22} />, link: "tel:+38344111222" },
+                                { icon: <Mail size={22} />, link: "mailto:dentalartstudio.ks@gmail.com" },
+                                { icon: <Phone size={22} />, link: "tel:+383 49 938 999" },
                                 { icon: <Facebook size={22} />, link: "https://www.facebook.com/profile.php?id=61566126190588" }
                             ].map((item, idx) => (
                                 <a
