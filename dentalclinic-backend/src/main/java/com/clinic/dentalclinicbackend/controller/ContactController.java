@@ -18,6 +18,8 @@ public class ContactController {
 
     @PostMapping
     public ResponseEntity<String> sendEmail(@Valid @RequestBody ContactRequest contactRequest) {
+        System.out.println("MAIL_USERNAME: " + System.getenv("MAIL_USERNAME"));
+        System.out.println("MAIL_PASSWORD: " + System.getenv("MAIL_PASSWORD"));
         emailService.sendContactEmail(contactRequest);
         return ResponseEntity.ok("Email sent successfully");
     }

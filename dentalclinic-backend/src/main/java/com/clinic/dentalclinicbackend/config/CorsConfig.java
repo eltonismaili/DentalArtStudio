@@ -17,8 +17,7 @@ public class CorsConfig {
                         .allowedOrigins(
                                 "http://localhost:3000",
                                 "https://www.dentalartstudio-ks.com",
-                                "https://dentalartstudio.netlify.app",
-                                "https://dentalartstudio.onrender.com"
+                                "https://dentalartstudio.netlify.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
