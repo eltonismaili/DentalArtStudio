@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/contact")
 @CrossOrigin(origins = "http://localhost:3000")
-
+@RequiredArgsConstructor
 public class ContactController {
 
-    private EmailService emailService;
+    private final EmailService emailService;
 
     @PostMapping
     public ResponseEntity<String> sendEmail(@Valid @RequestBody ContactRequest contactRequest) {
+        System.out.println("MAIL_USERNAME: " + System.getenv("MAIL_USERNAME"));
+        System.out.println("MAIL_PASSWORD: " + System.getenv("MAIL_PASSWORD"));
         emailService.sendContactEmail(contactRequest);
         return ResponseEntity.ok("Email sent successfully");
     }
+
+
 }

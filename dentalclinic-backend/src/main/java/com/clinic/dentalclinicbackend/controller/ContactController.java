@@ -21,4 +21,6 @@ public class ContactController {
         emailService.sendContactEmail(contactRequest);
         return ResponseEntity.ok("Email sent successfully");
     }
+
+
 }
