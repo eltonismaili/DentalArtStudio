@@ -30,6 +30,7 @@ body {
   overflow-x: hidden;
 }
 
+/* BUTTONS */
 .btn-custom-primary {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
@@ -66,6 +67,7 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+/* CUSTOM CARDS */
 .custom-card {
   background: var(--card-bg);
   border-radius: 16px;
@@ -80,6 +82,7 @@ body {
   box-shadow: var(--shadow-xl);
 }
 
+/* GRADIENT TEXT */
 .gradient-text {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   -webkit-background-clip: text;
@@ -87,6 +90,7 @@ body {
   background-clip: text;
 }
 
+/* ANIMATIONS */
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease-out forwards;
 }
@@ -141,6 +145,7 @@ body {
 .text-muted-custom {color:var(--muted-color);}
 .bg-muted-custom {background-color:#f1f5f9;}
 
+/* ICON CONTAINERS */
 .icon-container {
   width:64px;
   height:64px;
@@ -153,6 +158,7 @@ body {
 
 .icon-container:hover {transform:scale(1.1);}
 
+/* BEFORE/AFTER SLIDER */
 .before-after-container {
   position:relative;
   width:100%;
@@ -211,9 +217,15 @@ body {
   h2 {font-size:2rem !important;}
   h3 {font-size:1.5rem !important;}
 }
+
+/* CONTACT CARDS */
 .contact-card {
   background-color: #ffffff;
   box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  border: none;
 }
 
 .contact-card:hover {
@@ -221,13 +233,80 @@ body {
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 
-.icon-container {
-  transition: all 0.3s;
+.contact-card h5 {
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.contact-card p {
+  color: var(--muted-color);
+  font-size: 0.95rem;
 }
 
 .contact-card:hover .icon-container {
-  transform: scale(1.1);
+  transform: scale(1.2);
 }
+
+/* CONTACT FORM */
+.contact-form-card {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  transition: all 0.4s ease;
+  border: none;
+}
+
+.contact-form-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.contact-form-card .form-label {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.contact-form-card .form-control {
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 14px 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f9fafb;
+}
+
+.contact-form-card .form-control:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  outline: none;
+  background-color: #ffffff;
+}
+
+.contact-form-card textarea.form-control {
+  min-height: 140px;
+  resize: none;
+}
+
+.btn-contact {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 50px;
+  padding: 14px;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+.btn-contact:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
+  opacity: 0.95;
+}
+
+/* LED TEXT */
 .led-text {
   font-weight: 900;
   font-size: clamp(2.5rem, 6vw, 4rem);
@@ -244,37 +323,18 @@ body {
 }
 
 @keyframes led-shine {
-  0% {
-    text-shadow:
-            0 0 2px #a9d4e0,
-            0 0 5px #a9d4e0,
-            0 0 10px #a9d4e0,
-            0 0 20px #a9d4e0,
-            0 0 40px #a9d4e0;
-    color: white;
+  0%,100% {
+    text-shadow:0 0 2px #a9d4e0,0 0 5px #a9d4e0,0 0 10px #a9d4e0,0 0 20px #a9d4e0,0 0 40px #a9d4e0;
+    color:white;
   }
   50% {
-    text-shadow:
-            0 0 5px #a9d4e0,
-            0 0 10px #a9d4e0,
-            0 0 20px #a9d4e0,
-            0 0 40px #a9d4e0,
-            0 0 80px #a9d4e0;
-    color: white;
-  }
-  100% {
-    text-shadow:
-            0 0 2px #a9d4e0,
-            0 0 5px #a9d4e0,
-            0 0 10px #a9d4e0,
-            0 0 20px #a9d4e0,
-            0 0 40px #a9d4e0;
-    color: white;
+    text-shadow:0 0 5px #a9d4e0,0 0 10px #a9d4e0,0 0 20px #a9d4e0,0 0 40px #a9d4e0,0 0 80px #a9d4e0;
+    color:white;
   }
 }
 
+/* SCROLLBAR */
 html {scroll-behavior:smooth;}
-
 ::-webkit-scrollbar {width:10px;}
 ::-webkit-scrollbar-track {background:var(--background-color);}
 ::-webkit-scrollbar-thumb {

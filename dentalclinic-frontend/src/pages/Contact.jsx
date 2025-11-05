@@ -72,7 +72,7 @@ export default function Contact(){
 
         try {
             const response = await axios.post(
-                'http://localhost:8080/api/v1/contact',
+                'https://dentalartstudio.onrender.com/api/v1/contact',
                 { ...formData },
                 { headers: { 'Content-Type': 'application/json' } }
             );
@@ -110,59 +110,58 @@ export default function Contact(){
                     <p className='text-muted'>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
                 </div>
 
-                <div className='row g-4'>
-                    <div className='col-lg-6 observe-animation' ref={formRef}>
-                        <div className='card p-4 shadow-sm'>
-                            <h2 className='h4 fw-bold mb-4'>Send Us a Message</h2>
-                            {status.message && <div style={{marginBottom:12,color: status.type==='success' ? 'green' : '#d14343'}}>{status.message}</div>}
+                <div className="row g-4">
+                    <div className="col-lg-6 observe-animation" ref={formRef}>
+                        <div className="card shadow-lg p-5 rounded-4 contact-form-card">
+                            <h2 className="h4 fw-bold mb-4">Send Us a Message</h2>
+                            {status.message && <div className={`mb-3 ${status.type === 'success' ? 'text-success' : 'text-danger'}`}>{status.message}</div>}
                             <form onSubmit={handleSubmit}>
-                                <div className='mb-3'>
-                                    <label className='form-label'>Full Name</label>
-                                    <input className='form-control rounded-3' name='name' value={formData.name} onChange={handleChange} required placeholder='John Doe'/>
+                                <div className="mb-3">
+                                    <label className="form-label fw-semibold">Full Name</label>
+                                    <input className="form-control rounded-pill form-input" name="name" value={formData.name} onChange={handleChange} required />
                                 </div>
-                                <div className='mb-3'>
-                                    <label className='form-label'>Email Address</label>
-                                    <input className='form-control rounded-3' name='email' type='email' value={formData.email} onChange={handleChange} required placeholder='john@example.com'/>
+                                <div className="mb-3">
+                                    <label className="form-label fw-semibold">Email Address</label>
+                                    <input className="form-control rounded-pill form-input" name="email" type="email" value={formData.email} onChange={handleChange} required />
                                 </div>
-                                <div className='mb-3'>
-                                    <label className='form-label'>Phone Number</label>
+                                <div className="mb-3">
+                                    <label className="form-label fw-semibold">Phone Number</label>
                                     <input
-                                        className='form-control rounded-3'
-                                        name='phone'
-                                        type='tel'
+                                        className="form-control rounded-pill form-input"
+                                        name="phone"
+                                        type="tel"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        placeholder='+38344123456'
                                         pattern="^\+?[0-9]{7,15}$"
                                         title="Please enter a valid phone number (digits only, optional + at start)"
                                     />
                                 </div>
-                                <div className='mb-3'>
-                                    <label className='form-label'>Message</label>
-                                    <textarea className='form-control rounded-3' name='message' rows={5} value={formData.message} onChange={handleChange} required placeholder='Tell us how we can help you...' />
+                                <div className="mb-3">
+                                    <label className="form-label fw-semibold">Message</label>
+                                    <textarea className="form-control rounded-3 form-input" name="message" rows={5} value={formData.message} onChange={handleChange} placeholder="Tell us how we can help you..." required />
                                 </div>
-                                <button className='btn btn-primary w-100 d-flex justify-content-center align-items-center' type='submit' disabled={loading || (disabledUntil && new Date() < disabledUntil)}>
-                                    {loading && <span className='spinner-border spinner-border-sm me-2' role='status' aria-hidden='true'></span>}
+                                <button className="btn btn-gradient w-100 fw-bold" style={{backgroundColor:'#0A1F44F2',color:'#fff'}} type="submit" disabled={loading || (disabledUntil && new Date() < disabledUntil)}>
+                                    {loading && <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>}
                                     Send Message
                                 </button>
                             </form>
                         </div>
                     </div>
 
-                    <div className='col-lg-6 observe-animation'>
-                        <div className='card p-4 shadow-sm'>
-                            <h2 className='h4 fw-bold mb-4'>Visit Our Clinic</h2>
-                            <div className='ratio ratio-16x9 rounded mb-3'>
+                    <div className="col-lg-6 observe-animation">
+                        <div className="card shadow-lg p-4 rounded-4">
+                            <h2 className="h4 fw-bold mb-4">Visit Our Clinic</h2>
+                            <div className="ratio ratio-16x9 rounded mb-3">
                                 <iframe
                                     src="https://www.google.com/maps?q=Dental%20Art%20Studio%2C%20Garcia%20Lorka%2C%20Prishtina%2010000&output=embed"
                                     allowFullScreen
-                                    loading='lazy'
-                                    referrerPolicy='no-referrer-when-downgrade'
-                                    title='Dental Art Studio Location'
-                                    style={{border:0}}
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="Dental Art Studio Location"
+                                    style={{ border: 0 }}
                                 />
                             </div>
-                            <p className='text-muted'>We're conveniently located in the heart of Prishtinë. Free parking is available for patients.</p>
+                            <p className="text-muted">We're conveniently located in the heart of Prishtinë. Free parking is available for patients.</p>
                         </div>
                     </div>
                 </div>
@@ -209,3 +208,4 @@ export default function Contact(){
         </div>
     )
 }
+

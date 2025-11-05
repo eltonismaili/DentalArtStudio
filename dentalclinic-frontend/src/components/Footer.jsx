@@ -77,7 +77,7 @@ export default function Footer() {
                     className="text-center mb-0"
                     style={{ fontSize: "0.85rem", color: "#b0bec5", letterSpacing: "0.3px", fontWeight: 300 }}
                 >
-                    © 2025 Dental Art Studio. All Rights Reserved. | Designed by Elton Ismaili
+                    © 2025 Dental Art Studio. All Rights Reserved. | Built by Elton Ismaili
                 </p>
             </div>
         </footer>
