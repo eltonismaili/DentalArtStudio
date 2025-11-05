@@ -59,12 +59,12 @@ public class EmailServiceImpl implements EmailService {
             );
 
 
-            helper.setText(html, true);
+            helper.setText(html, true); // true = send HTML
             mailSender.send(message);
 
         } catch (MessagingException e) {
             System.err.println("Email send failed: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); // do ta shohësh në logs të Render
             throw new RuntimeException("Failed to send email", e);
         }
     }
