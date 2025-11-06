@@ -1,111 +1,111 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { MapPin, Phone, Mail } from 'lucide-react'
-import { useLocation } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useRef, useState } from 'react';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 import Footer from "../components/Footer";
 
-export default function Contact(){
-    const [formData, setFormData] = useState({name:'',email:'',phone:'',message:''})
-    const [status, setStatus] = useState({message:'',type:''})
-    const [loading, setLoading] = useState(false)
-    const [disabledUntil, setDisabledUntil] = useState(null)
-    const observerRef = useRef(null)
-    const location = useLocation()
-    const formRef = useRef(null)
+export default function Contact() {
+    const [formData, setFormData] = useState({ name: '', email: '', phone: '', message: '' });
+    const [status, setStatus] = useState({ message: '', type: '' });
+    const [loading, setLoading] = useState(false);
+    const [disabledUntil, setDisabledUntil] = useState(null);
+    const observerRef = useRef(null);
+    const location = useLocation();
+    const formRef = useRef(null);
 
     useEffect(() => {
-        const stored = localStorage.getItem('contactDisabledUntil')
-        if(stored) setDisabledUntil(new Date(stored))
-    }, [])
+        const stored = localStorage.getItem('contactDisabledUntil');
+        if (stored) setDisabledUntil(new Date(stored));
+    }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         observerRef.current = new IntersectionObserver(
             entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('animate-fade-in-up')),
-            {threshold:0.12}
-        )
-        document.querySelectorAll('.observe-animation').forEach(el => observerRef.current?.observe(el))
-        return () => observerRef.current?.disconnect()
-    },[])
+            { threshold: 0.12 }
+        );
+        document.querySelectorAll('.observe-animation').forEach(el => observerRef.current?.observe(el));
+        return () => observerRef.current?.disconnect();
+    }, []);
 
-    useEffect(()=>{
-        if(location.state?.scrollToForm && formRef.current){
-            formRef.current.scrollIntoView({behavior:'smooth'})
+    useEffect(() => {
+        if (location.state?.scrollToForm && formRef.current) {
+            formRef.current.scrollIntoView({ behavior: 'smooth' });
         }
-    },[location])
+    }, [location]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target
-
-
-        if(name === 'phone') {
-            const digits = value.replace(/[^\d+]/g,'')
-            setFormData({...formData, [name]: digits})
+        const { name, value } = e.target;
+        if (name === 'phone') {
+            const digits = value.replace(/[^\d+]/g, '');
+            setFormData({ ...formData, [name]: digits });
         } else {
-            setFormData({...formData, [name]: value})
+            setFormData({ ...formData, [name]: value });
         }
-    }
+    };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        const now = new Date()
-        if(disabledUntil && now < disabledUntil){
+        const now = new Date();
+        if (disabledUntil && now < disabledUntil) {
             setStatus({ message: `Please wait before sending another message.`, type: 'danger' });
             return;
         }
-
 
         if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
             setStatus({ message: 'Please fill required fields', type: 'danger' });
             return;
         }
 
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if(!emailRegex.test(formData.email)){
-            setStatus({ message:'Please enter a valid email address', type:'danger' })
-            return
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            setStatus({ message: 'Please enter a valid email address', type: 'danger' });
+            return;
         }
 
-        setLoading(true)
-        setStatus({ message:'', type:'' })
+        setLoading(true);
+        setStatus({ message: '', type: '' });
 
         try {
-            const response = await axios.post(
-                'https://dentalartstudio.onrender.com/api/v1/contact',
-                { ...formData },
-                { headers: { 'Content-Type': 'application/json' } }
+            const result = await emailjs.send(
+                'service_hzj2rqc',         // ✅ your EmailJS service ID
+                'template_oqsxirw',        // 🔁 replace with your EmailJS template ID
+                {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    phone: formData.phone,
+                    message: formData.message,
+                    to_email: 'eltonism9@gmail.com',
+                },
+                'SMqq7FEMWaC69kKjG'          // 🔁 replace with your EmailJS public key
             );
 
-            if (response.status === 200) {
-                setStatus({ message: 'Message sent successfully!', type: 'success' });
-                setFormData({ name: '', email: '', phone: '', message: '' });
+            console.log(result.text);
+            setStatus({ message: 'Message sent successfully!', type: 'success' });
+            setFormData({ name: '', email: '', phone: '', message: '' });
 
-                const disableTime = new Date()
-                disableTime.setMinutes(disableTime.getMinutes() + 5)
-                setDisabledUntil(disableTime)
-                localStorage.setItem('contactDisabledUntil', disableTime)
-            } else {
-                setStatus({ message: 'Error sending message. Try again later.', type: 'danger' });
-            }
+            const disableTime = new Date();
+            disableTime.setMinutes(disableTime.getMinutes() + 5);
+            setDisabledUntil(disableTime);
+            localStorage.setItem('contactDisabledUntil', disableTime);
         } catch (err) {
             console.error(err);
             setStatus({ message: 'Error sending message. Try again later.', type: 'danger' });
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     const contactInfo = [
-        {icon:MapPin,title:'Address',content:'Dental Art Studio, Garcia Lorka, Prishtina 10000'},
-        {icon:Phone,title:'Phone',content:'+383 49 938 999'},
-        {icon:Mail,title:'Email',content:'dentalartstudio.ks@gmail.com'},
-    ]
+        { icon: MapPin, title: 'Address', content: 'Dental Art Studio, Garcia Lorka, Prishtina 10000' },
+        { icon: Phone, title: 'Phone', content: '+383 49 938 999' },
+        { icon: Mail, title: 'Email', content: 'dentalartstudio.ks@gmail.com' },
+    ];
 
     return (
-        <div style={{background:'#f5f7fa', minHeight:'100vh', paddingTop:'40px'}}>
-            <div className='container py-5' style={{minHeight:'80vh'}}>
-                <div className='text-center mb-5 observe-animation' style={{marginTop:'50px'}}>
+        <div style={{ background: '#f5f7fa', minHeight: '100vh', paddingTop: '40px' }}>
+            <div className='container py-5' style={{ minHeight: '80vh' }}>
+                <div className='text-center mb-5 observe-animation' style={{ marginTop: '50px' }}>
                     <h1 className='display-4 fw-bold gradient-text' style={{ fontSize: '3rem' }}>Get in Touch</h1>
                     <p className='text-muted'>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
                 </div>
@@ -140,7 +140,7 @@ export default function Contact(){
                                     <label className="form-label fw-semibold">Message</label>
                                     <textarea className="form-control rounded-3 form-input" name="message" rows={5} value={formData.message} onChange={handleChange} placeholder="Tell us how we can help you..." required />
                                 </div>
-                                <button className="btn btn-gradient w-100 fw-bold" style={{backgroundColor:'#0A1F44F2',color:'#fff'}} type="submit" disabled={loading || (disabledUntil && new Date() < disabledUntil)}>
+                                <button className="btn btn-gradient w-100 fw-bold" style={{ backgroundColor: '#0A1F44F2', color: '#fff' }} type="submit" disabled={loading || (disabledUntil && new Date() < disabledUntil)}>
                                     {loading && <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>}
                                     Send Message
                                 </button>
@@ -166,29 +166,25 @@ export default function Contact(){
                     </div>
                 </div>
 
-
                 <div className='row row-cols-1 row-cols-md-3 g-4 mt-5'>
-                    {contactInfo.map((info,i)=>{
-                        const Icon = info.icon
+                    {contactInfo.map((info, i) => {
+                        const Icon = info.icon;
                         return (
                             <div key={i} className='col observe-animation'>
-                                <div
-                                    className='card text-center p-4 h-100 border-0 shadow-sm contact-card'
-                                    style={{borderRadius:'20px', transition:'all 0.3s'}}
-                                >
+                                <div className='card text-center p-4 h-100 border-0 shadow-sm contact-card' style={{ borderRadius: '20px', transition: 'all 0.3s' }}>
                                     <div
                                         className='icon-container mb-3'
                                         style={{
-                                            width:80,
-                                            height:80,
-                                            display:'inline-flex',
-                                            alignItems:'center',
-                                            justifyContent:'center',
-                                            borderRadius:'50%',
-                                            background:'linear-gradient(135deg, #3b82f6, #60a5fa)',
-                                            margin:'0 auto',
-                                            color:'white',
-                                            fontSize:'1.5rem'
+                                            width: 80,
+                                            height: 80,
+                                            display: 'inline-flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            borderRadius: '50%',
+                                            background: 'linear-gradient(135deg, #3b82f6, #60a5fa)',
+                                            margin: '0 auto',
+                                            color: 'white',
+                                            fontSize: '1.5rem'
                                         }}
                                     >
                                         <Icon size={32} color='white' />
@@ -197,15 +193,12 @@ export default function Contact(){
                                     <p className='text-muted mb-0'>{info.content}</p>
                                 </div>
                             </div>
-                        )
+                        );
                     })}
                 </div>
-
-
             </div>
 
-            <Footer/>
+            <Footer />
         </div>
-    )
+    );
 }
-
