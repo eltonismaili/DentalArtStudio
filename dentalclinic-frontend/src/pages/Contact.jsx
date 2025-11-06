@@ -68,8 +68,8 @@ export default function Contact() {
 
         try {
             const result = await emailjs.send(
-                'service_hzj2rqc',         // ✅ your EmailJS service ID
-                'template_oqsxirw',        // 🔁 replace with your EmailJS template ID
+                process.env.REACT_APP_EMAILJS_SERVICE_ID,
+                process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
                 {
                     from_name: formData.name,
                     from_email: formData.email,
@@ -77,7 +77,7 @@ export default function Contact() {
                     message: formData.message,
                     to_email: 'eltonism9@gmail.com',
                 },
-                'SMqq7FEMWaC69kKjG'          // 🔁 replace with your EmailJS public key
+                process.env.REACT_APP_EMAILJS_PUBLIC_KEY
             );
 
             console.log(result.text);
